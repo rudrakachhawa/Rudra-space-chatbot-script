@@ -12,16 +12,28 @@
     <button onclick="init()">Init</button>
     <!-- embedToken="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJvcmdfaWQiOiIxNTE4IiwiY2hhdGJvdF9pZCI6IjY2YjVjOTQ5ODEzNTkxNTczMzA2Mjc2OCIsInVzZXJfaWQiOiJydWRyYSJ9.ipmfmQpj4QJn49y7NmJhHCH-oKXJbNJjBSPaVA7jb_Q" -->
     <!-- embedToken="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJvcmdfaWQiOiIxMjg5IiwiY2hhdGJvdF9pZCI6IjY2NTk2YWU3ZjA0NGRlNzMzZTNlYzdlYiIsInVzZXJfaWQiOiJwYXJha2gifQ.ol_XuciFvI8fvDLPKJRQSSp08qEkWOIzU3zSps98a0I" -->
+    <!-- id="chatbot-main-script" -->
     <!-- embedToken="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJvcmdfaWQiOiIxMjg5IiwiY2hhdGJvdF9pZCI6IjY2NTk2YWU3ZjA0NGRlNzMzZTNlYzdlYiIsInVzZXJfaWQiOiJwYXJha2gifQ.ol_XuciFvI8fvDLPKJRQSSp08qEkWOIzU3zSps98a0I" -->
-    <script 
-        src="./chatbot-script.js" threadId="MobileSdk" bridgeName="sdk" fullScreen="false"></script>
+    <!-- <script 
+        src="./chatbot-script.js" threadId="MobileSdk" bridgeName="sdk" fullScreen="false"></script> -->
     <!-- embedToken="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJvcmdfaWQiOiI4MjY5IiwiY2hhdGJvdF9pZCI6IjY2OTBlZmE2MDFkMjc1YWEwODA4ZTZmMiIsInVzZXJfaWQiOjY2OTMsImlhdCI6MTc0NDYwODEzOH0.PozQ61bZBaT15u0F5ft7HXWUHLQtrxsGfWz-lZoySNw" -->
-    <script>
+    <!-- <script>
         // function init() {
         window.initChatWidget && window.initChatWidget({
-            widgetToken: "4532e"
+            // widgetToken: "4532e"
+            widgetToken: "fe6e6"
+            // widgetToken: "ea68a" // 'prod'
         })
         // }
+    </script> -->
+
+
+    <script type="text/javascript" src="https://chatbot-embed.viasocket.com/chatbot-dev.js?hello=true"></script>
+    <script type="text/javascript">
+        var helloConfig = {
+            widgetToken: "ea68a"
+        };
+        initChatWidget(helloConfig, 5000); // If you want to load widget with a delay, can pass 2nd param for delay in milliseconds
     </script>
 </body>
 

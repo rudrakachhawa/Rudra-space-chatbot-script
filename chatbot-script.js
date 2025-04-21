@@ -9,7 +9,7 @@ class ChatbotEmbedManager {
       type: 'popup',
       height: '80',
       heightUnit: '%',
-      width: '400',
+      width: '480',
       widthUnit: 'px',
       buttonName: ''
     };
@@ -283,7 +283,7 @@ class ChatbotEmbedManager {
     const iframe = document.createElement('iframe');
     iframe.id = 'iframe-component-interfaceEmbed';
     iframe.title = 'iframe';
-    iframe.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-popups');
+    iframe.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-popups allow-forms');
 
     this.parentContainer.appendChild(iframe);
 
