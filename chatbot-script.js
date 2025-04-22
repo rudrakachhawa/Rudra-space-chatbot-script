@@ -58,8 +58,7 @@ class ChatbotEmbedManager {
     link.id = 'chatbotEmbed-style';
     link.rel = 'stylesheet';
     link.type = 'text/css';
-    // link.href = this.urls.styleSheet;
-    link.href = './chatbot-style.css'
+    link.href = this.urls.styleSheet;
     return link;
   }
 
@@ -329,7 +328,7 @@ class ChatbotEmbedManager {
 
       const requestOptions = embedToken
         ? this.createTokenBasedRequest(embedToken)
-        : interfaceId ? this.createAnonymousRequest(interfaceId) : {};
+        : this.createAnonymousRequest(interfaceId);
 
       const response = await fetch(this.urls.login, requestOptions);
       return response.json();
@@ -578,16 +577,27 @@ window.reloadChats = () => {
 window.askAi = (data) => {
   sendMessageToChatbot({ type: 'askAi', data: data || "" });
 };
-// Parse and log URL search parameters
-const urlParams = new URLSearchParams(window.location.search);
-const searchParamsObj = {};
 
-// Convert URLSearchParams to a regular object for easier access
-for (const [key, value] of urlParams.entries()) {
-  searchParamsObj[key] = value;
+function getScriptParams() {
+  // Get the current script element
+  const script = document.currentScript || (function () {
+    // Fallback for browsers that don't support currentScript
+    const scripts = document.getElementsByTagName('script');
+    return scripts[scripts.length - 1];
+  })();
+
+  // Get the script URL
+  const scriptUrl = script.src;
+
+  // Parse URL to extract query parameters
+  const url = new URL(scriptUrl);
+  const params = new URLSearchParams(url.search);
+  return params;
 }
+
+const scriptParams = getScriptParams();
 // Store embedToken in helloProps if it exists in URL parameters
-if (searchParamsObj?.['hello']) {
+if (scriptParams.get('hello') === 'true' || scriptParams.get('hello') === true) {
   chatbotManager.isHelloChatWidget = true;
 }
 
