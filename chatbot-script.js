@@ -25,7 +25,9 @@ class ChatbotEmbedManager {
     this.state = {
       bodyLoaded: false,
       fullscreen: false,
-      tempDataToSend: null
+      tempDataToSend: null,
+      interfaceLoaded: false,
+      delayElapsed: false
     };
 
     this.initializeEventListeners();
@@ -62,68 +64,9 @@ class ChatbotEmbedManager {
     return link;
   }
 
-  extractScriptProps() {
-    const interfaceScript = document.getElementById('chatbot-main-script');
-    if (!interfaceScript) {
-      console.log('Script tag not found');
-      return {};
-    }
-
-    const attributes = [
-      'interfaceId', 'embedToken', 'threadId', 'bridgeName', 'variables',
-      'onOpen', 'onClose', 'iconColor', 'className', 'style', 'environment',
-      'fullScreen', 'hideCloseButton', 'hideIcon', 'parentId', 'config',
-      'headerButtons', 'eventsToSubscribe', 'modalConfig', 'allowModalSwitch',
-      'chatTitle', 'chatIcon', 'hideFullScreenButton'
-    ];
-
-    return attributes.reduce((props, attr) => {
-      if (interfaceScript.hasAttribute(attr)) {
-        let value = interfaceScript.getAttribute(attr);
-
-        if (['config', 'headerButtons', 'eventsToSubscribe', 'modalConfig'].includes(attr)) {
-          try {
-            value = JSON.parse(value);
-          } catch (e) {
-            console.error(`Error parsing ${attr}:`, e);
-          }
-        }
-        props[attr] = value;
-        this.state.tempDataToSend = { ...this.state.tempDataToSend, [attr]: value }
-      }
-      return props;
-    }, {});
-  }
-
   initializeEventListeners() {
-    this.observeScriptChanges();
     this.setupMessageListeners();
     this.setupResizeObserver();
-  }
-
-  observeScriptChanges() {
-    const observer = new MutationObserver((mutationsList) => {
-      for (const mutation of mutationsList) {
-        if (mutation.type === 'childList') {
-          this.handleScriptMutations(mutation);
-        }
-      }
-    });
-    observer.observe(document.head, { childList: true });
-  }
-
-  handleScriptMutations(mutation) {
-    mutation.addedNodes.forEach(node => {
-      if (node.id === 'chatbot-main-script') {
-        this.props = this.extractScriptProps();
-      }
-    });
-
-    mutation.removedNodes.forEach(node => {
-      if (node.id === 'chatbot-main-script') {
-        this.cleanupChatbot();
-      }
-    });
   }
 
   cleanupChatbot() {
@@ -152,7 +95,9 @@ class ChatbotEmbedManager {
         this.toggleFullscreen(false);
         break;
       case 'interfaceLoaded':
+        this.state.interfaceLoaded = true;
         this.sendInitialData();
+        this.showIconIfReady();
         break;
     }
   }
@@ -261,7 +206,7 @@ class ChatbotEmbedManager {
   loadContent() {
     if (this.state.bodyLoaded) return;
 
-    const { chatBotIcon, imgElement, textElement } = this.createChatbotIcon();
+    const { chatBotIcon } = this.createChatbotIcon();
     document.body.appendChild(chatBotIcon);
     document.head.appendChild(this.createStyleLink()); // load the External Css for script
 
@@ -270,7 +215,6 @@ class ChatbotEmbedManager {
     this.loadChatbotEmbed();
 
     this.state.bodyLoaded = true;
-    this.updateProps(this.extractScriptProps());
   }
 
   createIframeContainer() {
@@ -283,7 +227,7 @@ class ChatbotEmbedManager {
     iframe.id = 'iframe-component-interfaceEmbed';
     iframe.title = 'iframe';
     iframe.setAttribute('sandbox', 'allow-scripts allow-same-origin allow-popups allow-forms');
-    iframe.allow = 'microphone; camera';
+    iframe.allow = 'microphone *; camera *; midi *; encrypted-media *';
 
     this.parentContainer.appendChild(iframe);
 
@@ -310,70 +254,21 @@ class ChatbotEmbedManager {
 
   async loadChatbotEmbed() {
     try {
-      if (this.isHelloChatWidget) {
-        this.processChatbotDetails({});
-      } else {
-        const response = await this.fetchChatbotDetails();
-        this.processChatbotDetails(response);
-      }
+      this.processChatbotDetails({});
     } catch (error) {
       console.error('Chatbot embed loading error:', error);
     }
   }
 
-  async fetchChatbotDetails() {
-    try {
-      const script = document.getElementById('chatbot-main-script');
-      const embedToken = script?.getAttribute('embedToken');
-      const interfaceId = script?.getAttribute('interface_id');
-
-      const requestOptions = embedToken
-        ? this.createTokenBasedRequest(embedToken)
-        : this.createAnonymousRequest(interfaceId);
-
-      const response = await fetch(this.urls.login, requestOptions);
-      return response.json();
-    } catch (error) {
-      console.error('Fetch login user error:', error)
-    }
-  }
-
-  createTokenBasedRequest(embedToken) {
-    return {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: embedToken
-      }
-    };
-  }
-
-  createAnonymousRequest(interfaceId) {
-    return {
-      method: 'POST',
-      body: JSON.stringify({
-        isAnonymousUser: true,
-        interface_id: interfaceId
-      }),
-      headers: {
-        'Content-Type': 'application/json'
-      }
-    };
-  }
-
-  processChatbotDetails(data) {
+  processChatbotDetails() {
     const iframeComponent = document.getElementById('iframe-component-interfaceEmbed');
     if (!iframeComponent) return;
     let encodedData = '';
-    if (this.isHelloChatWidget) {
-      encodedData = encodeURIComponent(JSON.stringify({ isHelloUser: true }));
-    } else {
-      encodedData = encodeURIComponent(JSON.stringify(data.data));
-    }
+    encodedData = encodeURIComponent(JSON.stringify({ isHelloUser: true }));
     const modifiedUrl = `${this.urls.chatbotUrl}?interfaceDetails=${encodedData}`;
     iframeComponent.src = modifiedUrl;
 
-    this.props.config = { ...this.config, ...(data?.data?.config || {}) };
+    this.props.config = { ...this.config };
     this.applyConfig(this.props?.config);
   }
 
@@ -455,16 +350,21 @@ class ChatbotEmbedManager {
   }
 
   sendInitialData() {
-    const interfaceEmbed = document.getElementById('interfaceEmbed');
-    if (interfaceEmbed) {
-      interfaceEmbed.style.display = 'block';
-    }
     if (this.state.tempDataToSend || this.helloProps) {
-      sendMessageToChatbot({ type: 'interfaceData', data: this.state.tempDataToSend });
       sendMessageToChatbot({ type: 'helloData', data: this.helloProps });
       this.state.tempDataToSend = null;
     }
   }
+
+  showIconIfReady() {
+    if (this.state.interfaceLoaded && this.state.delayElapsed) {
+      const interfaceEmbed = document.getElementById('interfaceEmbed');
+      if (interfaceEmbed) {
+        interfaceEmbed.style.display = 'block';
+      }
+    }
+  }
+
 }
 
 const chatbotManager = new ChatbotEmbedManager();
@@ -579,36 +479,15 @@ window.askAi = (data) => {
   sendMessageToChatbot({ type: 'askAi', data: data || "" });
 };
 
-function getScriptParams() {
-  // Get the current script element
-  const script = document.currentScript || (function () {
-    // Fallback for browsers that don't support currentScript
-    const scripts = document.getElementsByTagName('script');
-    return scripts[scripts.length - 1];
-  })();
-
-  // Get the script URL
-  const scriptUrl = script.src;
-
-  // Parse URL to extract query parameters
-  const url = new URL(scriptUrl);
-  const params = new URLSearchParams(url.search);
-  return params;
-}
-
-const scriptParams = getScriptParams();
-// Store embedToken in helloProps if it exists in URL parameters
-if (scriptParams.get('hello') === 'true' || scriptParams.get('hello') === true) {
-  chatbotManager.isHelloChatWidget = true;
-}
-
 // Initialize the widget function
 window.initChatWidget = (data, delay = 0) => {
   if (data) {
     chatbotManager.helloProps = { ...data };
   }
+  setTimeout(() => {
+    chatbotManager.state.delayElapsed = true;
+    chatbotManager.showIconIfReady(); // Check if both conditions are met
+  }, delay);
 };
 
-setTimeout(() => {
-  chatbotManager.initializeChatbot();
-}, 1000);
+chatbotManager.initializeChatbot();
