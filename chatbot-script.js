@@ -2,7 +2,6 @@
 class ChatbotEmbedManager {
   constructor() {
     this.props = {};
-    this.isHelloChatWidget = false;
     this.helloProps = {};
     this.parentContainer = null;
     this.config = {
@@ -14,9 +13,8 @@ class ChatbotEmbedManager {
       buttonName: ''
     };
     this.urls = {
-      chatbotUrl: 'http://localhost:3001/chatbot',
-      styleSheet: 'https://chatbot-embed.viasocket.com/style-prod.css',
-      login: 'https://db.gtwy.ai/chatbot/loginuser',
+      chatbotUrl: 'https://dev-chatbot.gtwy.ai/chatbot',
+      styleSheet: 'https://chatbot-embed.viasocket.com/style-dev.css',
     };
     this.icons = {
       white: this.makeImageUrl('b1357e23-2fc6-4dc3-855a-7a213b1fa100'),
