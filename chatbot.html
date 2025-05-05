@@ -6,10 +6,23 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <!-- <link rel="stylesheet" href="https://interface-embed.viasocket.com/style.css"> -->
+    <style>
+        .active-button {
+            background-color: #4CAF50;
+            color: white;
+            font-weight: bold;
+            border: 2px solid #45a049;
+        }
+    </style>
 </head>
 
 <body>
-    <button onclick="init()">Init</button>
+    <button onclick="anoumousWidget1(); highlightButton(this)">Login Anoumous widget 1</button>
+    <button onclick="anoumousWidget2(); highlightButton(this)">Login Anoumous widget 2</button>
+    <button onclick="logoutWidget1(); highlightButton(this)">Logout widget 1</button>
+    <button onclick="logoutWidget2(); highlightButton(this)">Logout widget 2</button>
+    <button onclick="userWidget1(); highlightButton(this)">Login User widget 1</button>
+    <button onclick="userWidget2(); highlightButton(this)">Login User widget 2</button>
     <!-- embedToken="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJvcmdfaWQiOiIxNTE4IiwiY2hhdGJvdF9pZCI6IjY2YjVjOTQ5ODEzNTkxNTczMzA2Mjc2OCIsInVzZXJfaWQiOiJydWRyYSJ9.ipmfmQpj4QJn49y7NmJhHCH-oKXJbNJjBSPaVA7jb_Q" -->
     <!-- embedToken="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJvcmdfaWQiOiIxMjg5IiwiY2hhdGJvdF9pZCI6IjY2NTk2YWU3ZjA0NGRlNzMzZTNlYzdlYiIsInVzZXJfaWQiOiJwYXJha2gifQ.ol_XuciFvI8fvDLPKJRQSSp08qEkWOIzU3zSps98a0I" -->
     <!-- <script id="chatbot-main-script"
@@ -31,9 +44,55 @@
     <script type="text/javascript" src="http://localhost:3001/chat-widget-local.js"></script>
     <script type="text/javascript">
         var helloConfig = {
-            widgetToken: "fd59f"
+            widgetToken: "fd59f", // 
+            name:"Hrishab bhaiya "
         };
-        initChatWidget(helloConfig); // If you want to load widget with a delay, can pass 2nd param for delay in milliseconds
+
+        function anoumousWidget1() {
+            initChatWidget({ ...helloConfig, widgetToken: "fd59f" });
+        }
+
+        function anoumousWidget2() {
+            initChatWidget({ ...helloConfig, widgetToken: "068e9" });
+        }
+
+        function init() {
+            initChatWidget(helloConfig);
+        }
+
+        function userWidget1() {
+            initChatWidget({ ...helloConfig, widgetToken: "fd59f", mail: "sahil@viasockett.com", number: "+919826000001", name: "Sahill", unique_id: "sahil112333" });
+        }
+
+        function userWidget2() {
+            initChatWidget({ ...helloConfig, widgetToken: "068e9", mail: "sahil@viasockett.com", number: "+919826000001", name: "Sahill", unique_id: "sahil1124" });
+        }
+
+        function logoutWidget1() {
+            initChatWidget({ widgetToken: "fd59f" });
+        }
+
+        function logoutWidget2() {
+            initChatWidget({widgetToken: "068e9" });
+        }
+
+        function highlightButton(clickedButton) {
+            // Remove active class from all buttons
+            var buttons = document.querySelectorAll('button');
+            buttons.forEach(function (button) {
+                button.classList.remove('active-button');
+            });
+
+            // Add active class to clicked button
+            clickedButton.classList.add('active-button');
+        }
+
+        initChatWidget(helloConfig);
+
+        // Highlight the Init button by default since it's automatically called on page load
+        window.onload = function () {
+            document.querySelector('button').classList.add('active-button');
+        };
     </script>
 </body>
 
