@@ -14,13 +14,13 @@
             border: 2px solid #45a049;
         }
     </style>
-    <script type="text/javascript" src="http://localhost:3001/chat-widget.js"></script>
-    <!-- <script type="text/javascript" src="https://ctest.msg91.com/chat-widget.js"></script> -->
+    <!-- <script type="text/javascript" src="http://localhost:3001/chat-widget-local.js"></script> -->
+    <script type="text/javascript" src="https://ctest.msg91.com/chat-widget.js"></script>
 
 
     <!-- <script id="chatbot-main-script" src="http://localhost:3000/chatbot-local.js"
         embedToken="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJvcmdfaWQiOiIxMjg5IiwiY2hhdGJvdF9pZCI6IjY2NTk2YWU3ZjA0NGRlNzMzZTNlYzdlYiIsInVzZXJfaWQiOiJwYXJha2gifQ.ol_XuciFvI8fvDLPKJRQSSp08qEkWOIzU3zSps98a0I"
-        bridgeName="sdk" threadId="MobileSdk" defaultOpen="false" hideCloseButton="true"></script> -->
+        bridgeName="sdk" threadId="MobileSdk" parentId="rectangle" fullScreen="true" defaultOpen="true"></script> -->
 </head>
 
 <body>
@@ -113,19 +113,20 @@
     <!-- <script type="text/javascript" src="http://localhost:3001/chat-widget-local.js"></script> -->
     <script type="text/javascript">
         var helloConfig = {
+            // widgetToken: "93951",
+            // widgetToken: "020d3", // ( test )
             // widgetToken: "fd59f", // (parakh = test)
-            // widgetToken: "8bf56", // ( test )
-            widgetToken: "ec5d6", // testingprod ( prod )
+            widgetToken: "068e9", // ( test2 = test )
+            // widgetToken: "ec5d6", // testingprod ( prod )
             // widgetToken: "d1bc7", // testing rudra ( prod )
-            // widgetToken: "45d7f", //
             launch_widget: true,
+            // widgetToken: "45d7f", //
             // name: "Hrishab bhaiya 123",
-            unique_id: "Raju3"
+            unique_id: "Raju2"
         };
 
         function anoumousWidget1() {
-            // initChatWidget({ ...helloConfig, widgetToken: "d1bc7", launch_widget: true });
-            window.Chatbot.askAi("hello")
+            initChatWidget({ ...helloConfig, widgetToken: "d1bc7", launch_widget: true });
         }
 
         function anoumousWidget2() {
