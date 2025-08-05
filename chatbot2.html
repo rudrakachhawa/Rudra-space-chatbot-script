@@ -5,32 +5,15 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <!-- <link rel="stylesheet" href="https://interface-embed.viasocket.com/style.css"> -->
-    <style>
-        .active-button {
-            background-color: #4CAF50;
-            color: white;
-            font-weight: bold;
-            border: 2px solid #45a049;
-        }
-    </style>
-    <!-- <script type="text/javascript" src="http://localhost:3001/chat-widget-local.js"></script> -->
-    <script type="text/javascript" src="https://ctest.msg91.com/chat-widget.js"></script>
 
-
-    <!-- <script id="chatbot-main-script" src="http://localhost:3000/chatbot-local.js"
+    <script id="chatbot-main-script" src="http://localhost:3000/chatbot-local.js"
         embedToken="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJvcmdfaWQiOiIxMjg5IiwiY2hhdGJvdF9pZCI6IjY2NTk2YWU3ZjA0NGRlNzMzZTNlYzdlYiIsInVzZXJfaWQiOiJwYXJha2gifQ.ol_XuciFvI8fvDLPKJRQSSp08qEkWOIzU3zSps98a0I"
-        bridgeName="sdk" threadId="MobileSdk" parentId="rectangle" fullScreen="true" defaultOpen="true"></script> -->
+        bridgeName="parakh" threadId="parakh" defaultOpen="true" hideCloseButton="true" hideFullScreenButton="false"></script>
 </head>
 
 <body>
 
     <button onclick="anoumousWidget1(); highlightButton(this)">Login Anoumous widget 1</button>
-    <button onclick="anoumousWidget2(); highlightButton(this)">Login Anoumous widget 2</button>
-    <button onclick="logoutWidget1(); highlightButton(this)">Logout widget 1</button>
-    <button onclick="logoutWidget2(); highlightButton(this)">Logout widget 2</button>
-    <button onclick="userWidget1(); highlightButton(this)">Login User widget 1</button>
-    <button onclick="userWidget2(); highlightButton(this)">Login User widget 2</button>
     <button onclick="changeUrl('/new-path')">Go to New Page</button>
 
     <div style="display: flex; gap: 20px;">
@@ -40,143 +23,10 @@
         </div>
 
         <div id="rectangle2"
-            style="width: 300px; height: 800px; background-color: #f0f0f0; border: 1px solid #ccc; margin: 20px; padding: 10px;">
-            <p>This is a rectangle div with an ID</p>
+            style="width: 400px; height: 800px; background-color: #f0f0f0; border: 1px solid #ccc; margin: 20px; padding: 10px;">
+            <!-- <p>This is a rectangle div with an ID</p> -->
         </div>
     </div>
-    <!-- 
-    <script>
-        function anoumousWidget1() {
-            // window.SendDataToChatbot({ parentId: "rectangle2", fullScreen: true })
-            if (document.head) {
-                const scriptElement = document.getElementById('chatbot-main-script');
-                if (scriptElement) {
-                    scriptElement.parentNode.removeChild(scriptElement);
-                }
-            }
-        }
-    </script>
-    <script>
-        function anoumousWidget2() {
-            // Add the script element again
-            const newScript = document.createElement('script');
-            newScript.id = 'chatbot-main-script';
-            newScript.src = 'http://localhost:3001/chatbot-local.js';
-            newScript.setAttribute('embedToken', 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJvcmdfaWQiOiIxMjg5IiwiY2hhdGJvdF9pZCI6IjY2NTk2YWU3ZjA0NGRlNzMzZTNlYzdlYiIsInVzZXJfaWQiOiJwYXJha2gifQ.ol_XuciFvI8fvDLPKJRQSSp08qEkWOIzU3zSps98a0I');
-            newScript.setAttribute('bridgeName', 'sdk');
-            newScript.setAttribute('threadId', 'MobileSdk');
-            newScript.setAttribute('parentId', 'rectangle2');
-            newScript.setAttribute('fullScreen', 'true');
-            document.head.appendChild(newScript);
-        }
-    </script> -->
-
-
-
-    <!-- <script>
-        function anoumousWidget1() {
-            // Remove the chat widget script if it exists
-            // if (document.head) {
-            //     const scriptElement = document.querySelector('script[src="http://localhost:3001/chat-widget-local.js"]');
-            //     if (scriptElement) {
-            //         scriptElement.parentNode.removeChild(scriptElement);
-            //     }
-            // }
-            window.chatbot.open()
-            window.chatbot.sendData({
-                "threadId": "MobileSdk"
-            })
-        }
-    </script>
-    <script>
-        function anoumousWidget2() {
-            // Check if script already exists
-            // const existingScript = document.querySelector('script[src="http://localhost:3001/chat-widget-local.js"]');
-            // if (!existingScript) {
-            //     // Add the chat widget script
-            //     const newScript = document.createElement('script');
-            //     newScript.type = 'text/javascript';
-            //     newScript.src = 'http://localhost:3001/chat-widget-local.js';
-            //     document.head.appendChild(newScript);
-            // }
-            window.chatbot.sendData({
-                "threadId": "hello"
-            })
-        }
-    </script> -->
-
-
-
-
-    <!-- <script type="text/javascript" src="http://localhost:3001/chat-widget-local.js"></script> -->
-    <!-- <script type="text/javascript" src="https://blacksea.msg91.com/chat-widget.js"></script> -->
-    <!-- <script type="text/javascript" src="http://localhost:3001/chat-widget-local.js"></script> -->
-    <script type="text/javascript">
-        var helloConfig = {
-            // widgetToken: "93951",
-            // widgetToken: "020d3", // ( test )
-            // widgetToken: "fd59f", // (parakh = test)
-            widgetToken: "068e9", // ( test2 = test )
-            // widgetToken: "ec5d6", // testingprod ( prod )
-            // widgetToken: "d1bc7", // testing rudra ( prod )
-            launch_widget: true,
-            // widgetToken: "45d7f", //
-            // name: "Hrishab bhaiya 123",
-            unique_id: "Raju2"
-        };
-
-        function anoumousWidget1() {
-            initChatWidget({ ...helloConfig, widgetToken: "d1bc7", launch_widget: true });
-        }
-
-        function anoumousWidget2() {
-            initChatWidget({ ...helloConfig, widgetToken: "ec5d6", launch_widget: false });
-        }
-
-        function init() {
-            initChatWidget(helloConfig);
-        }
-
-        function userWidget1() {
-            initChatWidget({ ...helloConfig, widgetToken: "fd59f", mail: "sahil@viasockett.com", number: "+919826000001", name: "Sahill", unique_id: "sahil112333" });
-        }
-
-        function userWidget2() {
-            initChatWidget({ ...helloConfig, widgetToken: "068e9", mail: "sahil@viasockett.com", number: "+919826000001", name: "Sahill", unique_id: "sahil1124" });
-        }
-
-        function logoutWidget1() {
-            initChatWidget({ widgetToken: "fd59f" });
-        }
-
-        function logoutWidget2() {
-            initChatWidget({ widgetToken: "068e9" });
-        }
-
-        function highlightButton(clickedButton) {
-            // Remove active class from all buttons
-            var buttons = document.querySelectorAll('button');
-            buttons.forEach(function (button) {
-                button.classList.remove('active-button');
-            });
-
-            // Add active class to clicked button
-            clickedButton.classList.add('active-button');
-        }
-
-        initChatWidget(helloConfig);
-
-        window.onload = function () {
-            document.querySelector('button').classList.add('active-button');
-        };
-
-        function changeUrl(path) {
-            if (window.location.pathname !== path) {
-                history.pushState({}, '', path);
-                // Optional: trigger custom event or handle SPA routing
-            }
-        }
-    </script>
 </body>
 
 </html>

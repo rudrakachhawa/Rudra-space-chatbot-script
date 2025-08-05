@@ -1,50 +1,197 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <!-- <link rel="stylesheet" href="https://interface-embed.viasocket.com/style.css"> -->
+  <style>
+    .active-button {
+      background-color: #4CAF50;
+      color: white;
+      font-weight: bold;
+      border: 2px solid #45a049;
+    }
+  </style>
+  <!-- <script>
+    !function () {
+      var i = "cioanalytics", analytics = (window[i] = window[i] || []); if (!analytics.initialize) if (analytics.invoked) window.console && console.error && console.error("Snippet included twice."); else {
+        analytics.invoked = !0; analytics.methods = ["trackSubmit", "trackClick", "trackLink", "trackForm", "pageview", "identify", "reset", "group", "track", "ready", "alias", "debug", "page", "once", "off", "on", "addSourceMiddleware", "addIntegrationMiddleware", "setAnonymousId", "addDestinationMiddleware"]; analytics.factory = function (e) { return function () { var t = Array.prototype.slice.call(arguments); t.unshift(e); analytics.push(t); return analytics } }; for (var e = 0; e < analytics.methods.length; e++) { var key = analytics.methods[e]; analytics[key] = analytics.factory(key) } analytics.load = function (key, e) { var t = document.createElement("script"); t.type = "text/javascript"; t.async = !0; t.setAttribute('data-global-customerio-analytics-key', i); t.src = "https://cdp.customer.io/v1/analytics-js/snippet/" + key + "/analytics.min.js"; var n = document.getElementsByTagName("script")[0]; n.parentNode.insertBefore(t, n); analytics._writeKey = key; analytics._loadOptions = e }; analytics.SNIPPET_VERSION = "4.15.3";
+        analytics.load(
+          "675f8640e1513caa9f79",
+          // Optional: enable anonymous in-app. See https://docs.customer.io/journeys/anonymous-in-app/#enable-anonymous-in-app-messaging.
+          {
+            "integrations": {
+              "Customer.io In-App Plugin": {
+                anonymousInApp: true
+              }
+            }
+          }
+        );
+        analytics.page();
+      }
+    }();
+  </script> -->
+  <script type="text/javascript" src="http://localhost:3001/chat-widget-local.js"></script>
+  <!-- <script type="text/javascript" src="https://3a3c3f78.chat-widget-e5k.pages.dev/chat-widget-dev.js"></script> -->
+
+  <!-- <script type="text/javascript" src="https://ctest.msg91.com/chat-widget.js"></script> -->
+  <!-- <script type="text/javascript" src="https://blacksea.msg91.com/chat-widget.js"></script> -->
+  <!-- <script type="text/javascript" src="https://control.msg91.com/app/assets/widget/chat-widget.js"></script> -->
+
+
+  <!-- <script id="chatbot-main-script" src="http://localhost:3001/chatbot-local.js"
+        embedToken="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJvcmdfaWQiOiIxMjg5IiwiY2hhdGJvdF9pZCI6IjY2NTk2YWU3ZjA0NGRlNzMzZTNlYzdlYiIsInVzZXJfaWQiOiJwYXJha2gifQ.ol_XuciFvI8fvDLPKJRQSSp08qEkWOIzU3zSps98a0I"
+        bridgeName="sdk" threadId="MobileSdk" parentId="rectanglee" fullScreen="false" defaultOpen="true"
+        hideCloseButton="false"></script> -->
+</head>
 
 <body>
-  <button onclick="changeUrlSearchParam()">hello</button>
-  <!-- <script type="text/javascript" src="https://control.msg91.com/app/assets/widget/chat-widget.js"></script> -->
-  <script type="text/javascript" src="https://control.msg91.com/app/assets/widget/chat-widget.js"></script>
-  <!-- <script type="text/javascript" src="https://blacksea.msg91.com/chat-widget.js"></script> -->
+
+  <button onclick="anoumousWidget1(); highlightButton(this)">Login Anoumous widget 1</button>
+  <button onclick="anoumousWidget2(); highlightButton(this)">Login Anoumous widget 2</button>
+  <button onclick="logoutWidget1(); highlightButton(this)">Logout widget 1</button>
+  <button onclick="logoutWidget2(); highlightButton(this)">Logout widget 2</button>
+  <button onclick="userWidget1(); highlightButton(this)">Login User widget 1</button>
+  <button onclick="userWidget2(); highlightButton(this)">Login User widget 2</button>
+  <button onclick="changeUrl('/new-path')">Go to New Page</button>
+
+  <div style="display: flex; gap: 20px;">
+    <div id="rectangle"
+      style="width: 300px; height: 800px; background-color: #f0f0f0; border: 1px solid #ccc; margin: 20px; padding: 10px;">
+      <p>This is a rectangle div with an ID</p>
+    </div>
+
+    <div id="rectangle2"
+      style="width: 400px; height: 800px; background-color: #f0f0f0; border: 1px solid #ccc; margin: 20px; padding: 10px;">
+      <!-- <p>This is a rectangle div with an ID</p> -->
+    </div>
+  </div>
 
 
-  <!-- <script type="text/javascript">
-    var helloConfig = {
-      widgetToken: "ea68a",
-      // widgetToken: "45d7f", // 
-      // name: "Hrishab bhaiya 123",
-      // unique_id: "newwidget"
-      //icon_position:'right',
-      //icon_bottom_margin:250
-
-    };
-    initChatWidget(helloConfig, 5000);
-  </script> -->
-
-  <!-- <script type="text/javascript" src="https://blacksea.msg91.com/chat-widget.js"></script> -->
   <script type="text/javascript">
     var helloConfig = {
-      // widgetToken: "ec5d6",
-      widgetToken: "d1bc7",
-      // widgetToken: "ec5d6", // 
-      name: "Hrishab bhaiya 123",
-      unique_id: "newwidget3"
+      // widgetToken: "fd59f", // (parakh = test)
+      // widgetToken: "068e9", // (parakh = test)
+      // widgetToken: "f1827", // (msg91TestWhatsapp = test)
+
+
+      // widgetToken: "8bf56", // ( test )
+      // widgetToken: "8eef1", //  ( test )
+      widgetToken: "ec5d6", // testingprod ( prod )
+      // widgetToken: "d1bc7", // testing rudra ( prod )
+      // widgetToken: "45d7f", //
+      launch_widget: true,
+      // Name: "Parakh",
+      // show_widget_form: false,
+      // mail: "demo1@gmail.com",
+      // Test: "hello1123",
+      // Vishal: "parakh",
+      // Walkover: "walkover",
+      // unique_id: "15-jul-2025-3",
+      unique_id: "call2",
+      // urlsToOpenInIFrame: ['https://youtube.com', '/youtube', '/about', 'https://example.com', 'https://rustpad.io/',
+      //   "/contact",
+      //   "/products",
+      //   "/search",
+      //   "/chatbot-script.js",
+      //   "https://www.google.com"
+      // ],
     };
-    initChatWidget(helloConfig); // If you want to load widget with a delay, can pass 2nd param for delay in milliseconds
-  </script>
 
-  <script>
-    function changeUrlSearchParam() {
-      // Get the current URL
-      var currentUrl = window.location.href;
+    function anoumousWidget1() {
+      // initChatWidget({ widgetToken: "d1bc7", launch_widget: true });
+      // window.chatWidget.modifyCustomData({ name: "Parakh", Vishal: "Vishal" })
+      // initChatWidget({ widgetToken: "ec5d6", launch_widget: true, unique_id: 'call2' });
+      // window.chatWidget.addUserEvent({ event_name: "parakh", order_id: 1234 })
+      cioanalytics.identify('f4ca124298', {
+        email: 'cool.person@example.com',
+        first_name: 'cool',
+        last_name: 'person'
+      });
 
-      // Create a new URL object
-      var url = new URL(currentUrl);
+      // window.chatWidget.addUserEvent({ "name": "Parakh" })
+      // window.Chatbot.sendData({
+      //     // variables: { 'name': 'Raju' },
+      //     // version_id: "v1",
+      //     threadId: "1232",
+      // })
 
-      // Set the new search parameter
-      url.searchParams.set('newParam', 'newValue');
+      // Remove the chat widget script if it exists
+      // Check if the script already exists
+      // const existingScript = document.querySelector('script[src*="chat-widget-local"]');
 
-      // Update the URL in the browser without reloading the page
-      window.history.pushState({}, '', url);
+      // if (existingScript) {
+      //   // Remove the existing script
+      //   document.head.removeChild(existingScript);
+      //   console.log("Chat widget script has been removed");
+      // } else {
+      //   // Create and add a new script if not already present
+      //   const newScript = document.createElement("script");
+      //   newScript.type = "text/javascript";
+      //   newScript.src = "http://localhost:3001/chat-widget-local.js";
+      //   document.head.appendChild(newScript);
+      //   console.log("Chat widget script has been added");
+      // }
+
+    }
+
+    function anoumousWidget2() {
+      // initChatWidget({ ...helloConfig, widgetToken: "fd59f", launch_widget: true, unique_id: "Raju36" });
+      // initChatWidget({ widgetToken: "068e9", launch_widget: true, unique_id: "testing2" });
+      // window.open("https://example.com", "_blank")
+      // cioanalytics.track('class_started', {
+      //   title: 'How to use Customer.io',
+      //   progress: '2%',
+      //   category: 'getting started'
+      // });
+      initChatWidget({ widgetToken: 'fd59f', launch_widget: true, unique_id: "call2", });
+    }
+
+    function init() {
+      initChatWidget(helloConfig);
+    }
+
+    function userWidget1() {
+      // initChatWidget({ ...helloConfig, widgetToken: "fd59f", mail: "sahil@viasockett.com", number: "+919826000001", name: "Sahill", unique_id: "sahil112333" });
+      initChatWidget({ ...helloConfig })
+    }
+
+    function userWidget2() {
+      initChatWidget({ ...helloConfig, widgetToken: "068e9", mail: "sahil@viasockett.com", number: "+919826000001", name: "Sahill", unique_id: "sahil1124" });
+    }
+
+    function logoutWidget1() {
+      initChatWidget({ widgetToken: "fd59f" });
+    }
+
+    function logoutWidget2() {
+      initChatWidget({ widgetToken: "068e9" });
+    }
+
+    function highlightButton(clickedButton) {
+      // Remove active class from all buttons
+      var buttons = document.querySelectorAll('button');
+      buttons.forEach(function (button) {
+        button.classList.remove('active-button');
+      });
+
+      // Add active class to clicked button
+      clickedButton.classList.add('active-button');
+    }
+
+    initChatWidget(helloConfig);
+
+    window.onload = function () {
+      document.querySelector('button').classList.add('active-button');
+    };
+
+    function changeUrl(path) {
+      if (window.location.pathname !== path) {
+        history.pushState({}, '', path);
+        // Optional: trigger custom event or handle SPA routing
+      }
     }
   </script>
 </body>

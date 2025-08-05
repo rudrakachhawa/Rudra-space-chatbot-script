@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script type="text/javascript" src="http://localhost:3001/chat-widget-local.js"></script>
+    <style>
+        body {
+            font-family: sans-serif;
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .test-case {
+            margin: 15px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+
+        .test-title {
+            font-weight: bold;
+            margin-bottom: 10px;
+            color: #333;
+        }
+
+
+        a {
+            color: #0066cc;
+            text-decoration: underline;
+        }
+
+        .category {
+            margin-top: 30px;
+            padding-bottom: 5px;
+            border-bottom: 2px solid #666;
+            color: #333;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .new-test {
+            border-left: 4px solid #28a745;
+            background-color: #f8fff8;
+        }
+
+        .test-form {
+            padding: 10px;
+            background: #eef;
+            margin: 10px 0;
+            border-radius: 3px;
+        }
+
+        .test-form input {
+            margin: 5px;
+            padding: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>URL Tracker Test Suite - Enhanced</h1>
+    <button onclick="openYouTube()">Open YouTube</button>
+    <button onclick="openAbout()">Open about</button>
+    <a href="https://example.com" target="_blank">Open Example.com</a>
+    <div onclick="openAbout()">ehllo</div>
+    <script>
+        function openAbout() {
+            window.open('/about');
+        }
+        function openYouTube() {
+            // window.open('https://example.com');
+            window.open('https://rustpad.io/#KRREsL', '_blank');
+        }
+    </script>
+    <div class="category">Basic Link Tests</div>
+
+    <div class="test-case">
+        <div class="test-title">1. Simple A tag with relative URL</div>
+        <a href="/about">Click me (/about)</a>
+    </div>
+
+    <div class="test-case">
+        <div class="test-title">2. Simple A tag with absolute URL</div>
+        <a href="https://www.google.com">Click me (google.com)</a>
+    </div>
+
+    <div class="test-case">
+        <div class="test-title">3. A tag with target="_blank"</div>
+        <a href="/contact" target="_blank">Click me (opens in new tab)</a>
+    </div>
+
+    <div class="test-case">
+        <div class="test-title">4. Nested elements inside A tag</div>
+        <a href="/products">
+            <div style="padding: 10px; background: #eee;">
+                <span>Click anywhere in this box</span>
+            </div>
+        </a>
+    </div>
+
+    <div class="category">JavaScript Navigation Tests</div>
+
+    <div class="test-case">
+        <div class="test-title">5. Button with onclick window.open()</div>
+        <button onclick="window.open('/chatbot-script.js')">Click me (window.open)</button>
+    </div>
+
+    <div class="test-case">
+        <div class="test-title">6. Button with onclick location.href</div>
+        <button onclick="window.location.href='/about'">Click me (location.href)</button>
+    </div>
+
+    <div class="test-case">
+        <div class="test-title">7. Button with onclick location.assign()</div>
+        <button onclick="location.assign('/about')">Click me (location.assign)</button>
+    </div>
+
+    <div class="test-case">
+        <div class="test-title">8. Button with onclick location.replace()</div>
+        <button onclick="location.replace('/about')">Click me (location.replace)</button>
+    </div>
+
+    <div class="test-case">
+        <div class="test-title">9. Button with history.pushState()</div>
+        <button onclick="history.pushState({}, '', '/about')">Click me (pushState)</button>
+    </div>
+
+    <div class="category">🆕 Additional Method Override Tests</div>
+
+    <div class="test-case new-test">
+        <div class="test-title">21. Direct location.href assignment</div>
+        <button onclick="testDirectLocationHref()">Test location.href = '/about'</button>
+        <p><small>Tests the location.href setter override</small></p>
+    </div>
+
+    <div class="test-case new-test">
+        <div class="test-title">22. history.replaceState() method</div>
+        <button onclick="testHistoryReplaceState()">Test history.replaceState()</button>
+        <p><small>Tests the history.replaceState override</small></p>
+    </div>
+
+    <div class="test-case new-test">
+        <div class="test-title">23. window.location assignment</div>
+        <button onclick="testWindowLocationAssignment()">Test window.location = '/about'</button>
+        <p><small>Tests the window.location setter override</small></p>
+    </div>
+
+    <div class="test-case new-test">
+        <div class="test-title">24. Form GET submission</div>
+        <div class="test-form">
+            <form action="/search">
+                <input type="text" name="q" value="test query" placeholder="Search term">
+                <input type="hidden" name="category" value="products">
+                <button type="submit">Submit GET Form</button>
+            </form>
+        </div>
+        <p><small>Tests form submission interception with query parameters</small></p>
+    </div>
+
+    <div class="test-case new-test">
+        <div class="test-title">25. Form POST submission</div>
+        <div class="test-form">
+            <form action="/contacttttt" method="get">
+                <input type="text" name="name" value="John Doe" placeholder="Your name">
+                <input type="email" name="email" value="john@example.com" placeholder="Email">
+                <button type="submit">Submit POST Form</button>
+            </form>
+        </div>
+        <p><small>Tests POST form submission interception</small></p>
+    </div>
+
+    <div class="test-case new-test">
+        <div class="test-title">26. Hash navigation</div>
+        <button onclick="testHashNavigation()">Test location.hash = '#/about'</button>
+        <p><small>Tests hash-based navigation (SPA routing)</small></p>
+    </div>
+
+    <div class="test-case new-test">
+        <div class="test-title">27. Multiple navigation methods in sequence</div>
+        <button onclick="testSequentialNavigation()">Test Sequential Navigation</button>
+        <p><small>Tests multiple navigation attempts in quick succession</small></p>
+    </div>
+
+    <div class="test-case new-test">
+        <div class="test-title">28. Iframe src assignment</div>
+        <button onclick="testIframeSrcAssignment()">Test iframe.src = '/about'</button>
+        <div id="testIframeContainer"></div>
+        <p><small>Tests direct iframe src assignment</small></p>
+    </div>
+
+    <div class="category">Dynamic Element Tests</div>
+
+    <div class="test-case">
+        <div class="test-title">10. Dynamically added A tag</div>
+        <button id="addLinkBtn">Click to add dynamic link</button>
+        <div id="dynamicLinkContainer"></div>
+    </div>
+
+    <div class="test-case">
+        <div class="test-title">11. Dynamically added button with onclick</div>
+        <button id="addButtonBtn">Click to add dynamic button</button>
+        <div id="dynamicButtonContainer"></div>
+    </div>
+
+    <div class="test-case new-test">
+        <div class="test-title">29. Dynamically added form</div>
+        <button id="addFormBtn">Click to add dynamic form</button>
+        <div id="dynamicFormContainer"></div>
+        <p><small>Tests MutationObserver handling of dynamic forms</small></p>
+    </div>
+
+    <div class="category">Special Case Tests</div>
+
+    <div class="test-case">
+        <div class="test-title">12. Parent div with onclick, span child</div>
+        <div onclick="window.open('/about')" style="padding: 10px; background: #eef; cursor: pointer;">
+            <span>Click anywhere in this div</span>
+        </div>
+    </div>
+
+    <div class="test-case">
+        <div class="test-title">13. Element with data-url attribute</div>
+        <div data-url="/about" style="padding: 10px; background: #fee; cursor: pointer;">
+            Click me (data-url)
+        </div>
+    </div>
+
+    <div class="test-case">
+        <div class="test-title">14. Complex onclick with multiple statements</div>
+        <button onclick="console.log('test'); window.open('/about'); return false;">
+            Click me (complex onclick)
+        </button>
+    </div>
+
+    <div class="test-case">
+        <div class="test-title">15. Different quote styles in onclick</div>
+        <button onclick='window.open("/about")'>Single quotes</button>
+    </div>
+
+    <div class="category">Programmatic Navigation Tests</div>
+
+    <div class="test-case">
+        <div class="test-title">16. Programmatic window.open()</div>
+        <button onclick="testProgrammaticOpen()">Test window.open()</button>
+    </div>
+
+    <div class="test-case">
+        <div class="test-title">17. Programmatic location.assign()</div>
+        <button onclick="testProgrammaticAssign()">Test location.assign()</button>
+    </div>
+
+    <div class="test-case">
+        <div class="test-title">18. Programmatic pushState()</div>
+        <button onclick="testProgrammaticPushState()">Test pushState()</button>
+    </div>
+
+    <div class="category">Edge Case Tests</div>
+
+    <div class="test-case">
+        <div class="test-title">19. Malformed URL in onclick</div>
+        <button onclick="window.open('about')">Click me (malformed URL)</button>
+    </div>
+
+    <div class="test-case">
+        <div class="test-title">20. URL with query parameters</div>
+        <a href="/search?q=test&sort=desc">Click me (URL with params)</a>
+    </div>
+
+    <div class="test-case new-test">
+        <div class="test-title">30. Error handling test</div>
+        <button onclick="testErrorHandling()">Test Invalid URL Handling</button>
+        <p><small>Tests how the tracker handles malformed URLs and errors</small></p>
+    </div>
+
+    <div class="category">🎮 Control Panel</div>
+
+    <div class="test-case">
+        <div class="test-title">Debug Controls</div>
+        <button onclick="toggleDebugMode()">Toggle Debug Mode</button>
+        <button onclick="clearConsole()">Clear Console</button>
+        <button onclick="closeCurrentIframe()">Close Current Iframe</button>
+        <p id="debugStatus"><small>Debug mode: <span id="debugStatusText">Unknown</span></small></p>
+    </div>
+
+    <script>
+        // =============================================================================
+        // NEW TEST FUNCTIONS FOR ADDITIONAL METHOD OVERRIDES
+        // =============================================================================
+
+        // Test direct location.href assignment (Test 21)
+        function testDirectLocationHref() {
+            console.log('Testing: location.href = "/about"');
+            location.href = '/about';
+        }
+
+        // Test history.replaceState (Test 22)
+        function testHistoryReplaceState() {
+            console.log('Testing: history.replaceState()');
+            history.replaceState({ test: true }, 'Test Page', '/about');
+        }
+
+        // Test window.location assignment (Test 23)
+        function testWindowLocationAssignment() {
+            console.log('Testing: window.location = "/about"');
+            window.location = '/about';
+        }
+
+        // Test hash navigation (Test 26)
+        function testHashNavigation() {
+            console.log('Testing: location.hash = "#/about"');
+            location.hash = '#/about';
+        }
+
+        // Test sequential navigation (Test 27)
+        function testSequentialNavigation() {
+            console.log('Testing: Sequential navigation calls');
+            setTimeout(() => window.open('/about'), 100);
+            setTimeout(() => location.assign('/contact'), 200);
+            setTimeout(() => history.pushState({}, '', '/products'), 300);
+        }
+
+        // Test iframe src assignment (Test 28)
+        function testIframeSrcAssignment() {
+            console.log('Testing: iframe.src assignment');
+            const container = document.getElementById('testIframeContainer');
+
+            // Clear previous iframe
+            container.innerHTML = '';
+
+            // Create new iframe
+            const iframe = document.createElement('iframe');
+            iframe.style.cssText = 'width: 300px; height: 200px; border: 1px solid #ccc; margin: 10px 0;';
+            container.appendChild(iframe);
+
+            // This assignment should potentially be tracked
+            iframe.src = '/about';
+        }
+
+        // Test error handling (Test 30)
+        function testErrorHandling() {
+            console.log('Testing: Error handling with invalid URLs');
+            try {
+                window.open('not-a-valid-url://test');
+            } catch (e) {
+                console.log('Caught error:', e.message);
+            }
+
+            try {
+                location.assign('');
+            } catch (e) {
+                console.log('Caught error:', e.message);
+            }
+        }
+
+        // =============================================================================
+        // EXISTING TEST FUNCTIONS
+        // =============================================================================
+
+        // Helper functions for dynamic tests
+        document.getElementById('addLinkBtn').addEventListener('click', function () {
+            const link = document.createElement('a');
+            link.href = '/contact';
+            link.textContent = 'Dynamically added link (/contact)';
+            document.getElementById('dynamicLinkContainer').appendChild(link);
+        });
+
+        document.getElementById('addButtonBtn').addEventListener('click', function () {
+            const button = document.createElement('button');
+            button.textContent = 'Dynamically added button';
+            button.onclick = function () { window.open('/products'); };
+            document.getElementById('dynamicButtonContainer').appendChild(button);
+        });
+
+        // New: Add dynamic form (Test 29)
+        document.getElementById('addFormBtn').addEventListener('click', function () {
+            const form = document.createElement('form');
+            form.action = '/contact';
+            form.method = 'get';
+            form.innerHTML = `
+            <input type="text" name="dynamic" value="test">
+            <button type="submit">Dynamic Form Submit</button>
+          `;
+            document.getElementById('dynamicFormContainer').appendChild(form);
+        });
+
+        // Programmatic navigation test functions
+        function testProgrammaticOpen() {
+            console.log('Testing: Programmatic window.open()');
+            window.open('/about');
+        }
+
+        function testProgrammaticAssign() {
+            console.log('Testing: Programmatic location.assign()');
+            window.location.assign('/about');
+        }
+
+        function testProgrammaticPushState() {
+            console.log('Testing: Programmatic pushState()');
+            history.pushState({}, '', '/about');
+        }
+
+        // =============================================================================
+        // DEBUG CONTROLS
+        // =============================================================================
+
+        let debugMode = true;
+
+        function toggleDebugMode() {
+            debugMode = !debugMode;
+            document.getElementById('debugStatusText').textContent = debugMode ? 'ON' : 'OFF';
+            console.log('Debug mode:', debugMode ? 'enabled' : 'disabled');
+        }
+
+        function clearConsole() {
+            console.clear();
+            console.log('Console cleared - URL Tracker Test Suite ready');
+        }
+
+        function closeCurrentIframe() {
+            // This would work if you expose a close method in your URL tracker
+            if (window.chatWidget && window.chatWidget.closeIframe) {
+                window.chatWidget.closeIframe();
+            } else {
+                // Try to press ESC to close iframe
+                const escEvent = new KeyboardEvent('keydown', { key: 'Escape' });
+                document.dispatchEvent(escEvent);
+            }
+        }
+
+        // Initialize debug status
+        document.getElementById('debugStatusText').textContent = debugMode ? 'ON' : 'OFF';
+
+        console.log('Enhanced URL Tracker Test Suite loaded successfully!');
+        console.log('🆕 New tests added: 21-30');
+
+        window.addEventListener('popstate', () => {
+            console.log("gffg", location.pathname)
+            // if (location.pathname === '/about') {
+            //   console.log('Intercepted back/forward to /about');
+            //   myCustomFunction();
+            //   history.replaceState(null, '', '/'); // Optionally prevent staying on /about
+            // }
+        });
+        console.log('📋 Total test cases: 30');
+    </script>
+
+
+
+
+
+
+
+
+
+
+    <script type="text/javascript">
+        var helloConfig = {
+            // widgetToken: "fd59f", // (parakh = test)
+            // widgetToken: "8bf56", // ( test )
+            // widgetToken: "ec5d6", // testingprod ( prod )
+            widgetToken: "d1bc7", // testing rudra ( prod )
+            // widgetToken: "45d7f", //
+            // launch_widget: true,
+            urlsToOpenInIFrame: ['https://youtube.com', '/youtube', '/about', 'https://example.com', 'https://rustpad.io/',
+                "/contact",
+                "/products",
+                "/search",
+                "/chatbot-script.js",
+                "https://www.google.com"
+            ],
+            unique_id: "Raju37"
+        };
+
+
+        initChatWidget(helloConfig);
+    </script>
+</body>
+
+</html>

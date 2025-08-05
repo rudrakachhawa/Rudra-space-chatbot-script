@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <!-- <link rel="stylesheet" href="https://interface-embed.viasocket.com/style.css"> -->
+  <style>
+    .active-button {
+      background-color: #4CAF50;
+      color: white;
+      font-weight: bold;
+      border: 2px solid #45a049;
+    }
+  </style>
+
+  <!-- URLS -->
+  <script type="text/javascript" src="http://localhost:3001/chat-widget-local.js"></script>
+  <script type="text/javascript" src="http://localhost:3000/chat-widget-local.js"></script>
+  <!-- <script type="text/javascript" src="https://ctest.msg91.com/chat-widget.js"></script> -->
+  <!-- <script type="text/javascript" src="https://blacksea.msg91.com/chat-widget.js"></script> -->
+  <!-- <script type="text/javascript" src="https://control.msg91.com/app/assets/widget/chat-widget.js"></script> -->
+
+</head>
+
+<body>
+
+  <button onclick="anoumousWidget1(); highlightButton(this)">Login Anoumous widget 1</button>
+  <button onclick="anoumousWidget2(); highlightButton(this)">Login Anoumous widget 2</button>
+  <button onclick="logoutWidget1(); highlightButton(this)">Logout widget 1</button>
+  <button onclick="logoutWidget2(); highlightButton(this)">Logout widget 2</button>
+  <button onclick="loginWidget1(); highlightButton(this)">Login User widget 1</button>
+  <button onclick="loginWidget2(); highlightButton(this)">Login User widget 2</button>
+  <button onclick="changeUrl('/new-path')">Go to New Page</button>
+
+
+
+  <script type="text/javascript">
+    var helloConfig = {
+      widgetToken: "fd59f", // (parakh = test)
+      // widgetToken: "068e9", // (parakh = test)
+      // widgetToken: "f1827", // (msg91TestWhatsapp = test)
+      launch_widget: true,
+      // unique_id: "call3",
+    };
+
+    function anoumousWidget1() {
+      initChatWidget({ widgetToken: "fd59f", launch_widget: true });
+    }
+
+    function anoumousWidget2() {
+      initChatWidget({ widgetToken: 'f1827', launch_widget: true });
+    }
+
+    function logoutWidget1() {
+      initChatWidget({ widgetToken: "fd59f", launch_widget: true });
+    }
+
+    function logoutWidget2() {
+      initChatWidget({ widgetToken: "f1827", launch_widget: true });
+    }
+
+    function loginWidget1() {
+      initChatWidget({ widgetToken: "fd59f", launch_widget: true, unique_id: "call3" });
+    }
+
+    function loginWidget2() {
+      initChatWidget({ widgetToken: "f1827", launch_widget: true, unique_id: "call3", mail: 'parakh@whozzat.com', name: 'Parakh jain', number: '919399402221' });
+    }
+
+
+    function init() {
+      initChatWidget(helloConfig);
+    }
+
+    function highlightButton(clickedButton) {
+      // Remove active class from all buttons
+      var buttons = document.querySelectorAll('button');
+      buttons.forEach(function (button) {
+        button.classList.remove('active-button');
+      });
+
+      // Add active class to clicked button
+      clickedButton.classList.add('active-button');
+    }
+
+    initChatWidget(helloConfig);
+    // initChatWidget({ widgetToken: "f1827", launch_widget: true, unique_id: "call3" });
+
+    window.onload = function () {
+      document.querySelector('button').classList.add('active-button');
+    };
+
+    function changeUrl(path) {
+      if (window.location.pathname !== path) {
+        history.pushState({}, '', path);
+        // Optional: trigger custom event or handle SPA routing
+      }
+    }
+  </script>
+</body>
+
+</html>

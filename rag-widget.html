@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <div>
+        <h2>RAG Container</h2>
+        <p>This is the parent container where RAG will be loaded.</p>
+    </div>
+    <div id="parentContainer" style="padding: 20px; margin: 20px; background-color: #F9F9F9; width: 70vw;">
+
+    </div>
+    <h1>hello</h1>
+    <script id="rag-main-script" parentId="parentContainer" hideIcon="true" listPage="true"
+        src="http://dev-chatbot.gtwy.ai/rag-dev.js"
+        embedToken="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJvcmdfaWQiOjg1MzcsInVzZXJfaWQiOiJ1bmlxdWVfdXNlcl9pZCJ9.om87YqcyjIm-a5QGIAUn2dTWdKfW8iMj2NeVKcAHkMU"
+        theme="dark" defaultOpen="true">
+        </script>
+
+    <script>
+        window.addEventListener('message', (event) => {
+            if (true) {
+                if (event.data.type === 'rag') {
+                    console.log('Received linternew event:', event.data);
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>
