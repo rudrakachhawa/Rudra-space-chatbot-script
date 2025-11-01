@@ -5,18 +5,30 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Document</title>
-  <script type="text/javascript" src="https://blacksea.msg91.com/chat-widget.js"></script>
-
+  <script type="text/javascript" src="http://localhost:3001/chat-widget-dev.js"></script>
 </head>
 
 <body style="box-sizing: border-box;">
+  <button onclick="addScript()">Add Script</button>
+  <button onclick="removeScript()">Remove Script</button>
   <script type="text/javascript">
     var helloConfig = {
-      widgetToken: "a13cc",
-      hide_launcher: false,
+      widgetToken: "068e9",
       unique_id: 'parakh'
     };
-    initChatWidget(helloConfig);
+    function addScript() {
+      var script = document.createElement('script');
+      // script.src = 'https://ctest.msg91.com/chat-widget.js';
+      script.src = 'http://localhost:3001/chat-widget-dev.js';
+      document.head.appendChild(script);
+      initChatWidget(helloConfig);
+    }
+    function removeScript() {
+      var script = document.querySelector('script[src="http://localhost:3001/chat-widget-dev.js"]');
+      if (script) {
+        script.remove();
+      }
+    }
   </script>
 </body>
 
