@@ -17,7 +17,7 @@
 
   <!-- URLS -->
   <script type="text/javascript" src="http://localhost:3001/chat-widget-local.js"></script>
-  <script type="text/javascript" src="http://localhost:3000/chat-widget-local.js"></script>
+  <!-- <script type="text/javascript" src="http://localhost:3000/chat-widget-local.js"></script> -->
   <!-- <script type="text/javascript" src="http://localhost:3000/chat-widget-local.js"></script> -->
   <!-- <script type="text/javascript" src="https://ctest.msg91.com/chat-widget.js"></script> -->
   <!-- <script type="text/javascript" src="https://blacksea.msg91.com/chat-widget.js"></script> -->
@@ -31,48 +31,61 @@
   <button onclick="anoumousWidget2(); highlightButton(this)">Login Anoumous widget 2</button>
 
   <div id="widget-container"
-    style="width: 400px; height: 800px; background-color: #f5f5f5; border-radius: 8px; margin: 20px;">
+    style="width: 1100px; height: 90vh; background-color: #f5f5f5; border-radius: 8px; margin: 20px;">
   </div>
-  <div id="widget-container1"
+  <!-- <div id="widget-container1"
     style="width: 400px; height: 800px; background-color: #f5f5f5; border-radius: 8px; margin: 20px;">
-  </div>
+  </div> -->
 
 
   <script type="text/javascript">
     var helloConfig = {
       // widgetToken: "fd59f", // (parakh = test)
-      widgetToken: "068e9", // (parakh = test)
+      // widgetToken: "6c82a", // (parakh = test)
+      widgetToken: 'ab6e2', // (parakh_testing = test = msg91testwhatsapp)
+      // launch_widget: true,
+      unique_id: "demo107",
+      // variables: {
+      //   name: 'parakh',
+      //   company: 'walkover'
+      // }
+      // widgetToken: "ad2cd", // (parakh = test)
+      //widgetToken: "d1bc7",
       // widgetToken: "70637", // (parakh = non bot)
       // widgetToken: "97a63", // (parakh-widget-testing = test)
       // widgetToken: "f1827", // (msg91TestWhatsapp = test)
       // widgetToken: "43f6e", // (msg91TestWhatsapp = test)
       // widgetToken: 'abcde',
+      // widgetToken: "6e96f", // (viasocket = test)
       // widgetToken: 'ec5d6', // superheros prod068e9
-      launch_widget: true,
+      // theme: 'light',
+      // theme: 'system',
       // variables: { bot_id: 917, bot_type: "custom" },
       // variables: { bot_id: 1341, bot_type: "custom" },
       // show_close_button: false,
-      // unique_id: "demo2",
-      parentId: 'widget-container',
+      // parentId: 'widget-container',
+      // viewMode: 'ticket',
+      // fullScreen: true
     };
 
     var helloConfig2 = {
 
-      // widgetToken: "068e9", // (parakh = test)
-      widgetToken: "70637", // (parakh = test)
+      widgetToken: "068e9", // (parakh = test)
+      // widgetToken: "70637", // (parakh = test)
       launch_widget: true,
       // unique_id: "demo2",
       // parentId: 'widget-container1',
     };
 
-    window[`initChatWidget_localhost:3001`](helloConfig);
+    // window[`initChatWidget_localhost:3001`](helloConfig);
     // window[`initChatWidget_localhost:3000`](helloConfig2);
 
-    // initChatWidget(helloConfig);
+    initChatWidget(helloConfig);
 
 
 
-    function anoumousWidget1() {
+    async function anoumousWidget1() {
+      chatWidget.SendDataToBot({ variables: { name: 'parakh jain', company: 'walkover', email: 'parakh@whozzat.com' } })
       // initChatWidget({ widgetToken: "fd59f", launch_widget: true });
       // chatWidget.SendDataToBot({
       //   // parentId: 'widget-container',
@@ -81,8 +94,11 @@
       //   show_close_button: false,
       //   themeColor: '#ffffff'
       // })
-      initChatWidget({ widgetToken: "abcde", parentId: 'widget-container', launch_widget: true, variables: { bot_id: 1340, bot_type: "custom" } });
-      // chatWidget.SendDataToBot({ variables: { bot_id: 908, bot_type: "custom" } })
+      // chatWidget.createTicket("ch-comp-301408.c3d40e1d0565478dbb21329972c4c9af")
+      // console.log(await chatWidget.getTicketUnreadCount("ch-comp-301408.ed2a61a82b894401b3f312c5d446806e"));
+      // window.chatWidget.SendDataToBot({ viewMode: 'chatbot', fullScreen: false })
+      // initChatWidget({ widgetToken: "068e9", unique_id: "demo24" });
+      // chatWidget.showTicket("ch-comp-301408.1f97176726414dc99501a5f6a639fff8")
     }
 
     function anoumousWidget2() {
@@ -98,7 +114,10 @@
       //     bot_type: "custom"
       //   }
       // })
-      initChatWidget({ widgetToken: "abcde", parentId: 'widget-container', launch_widget: true, variables: { bot_id: 1339, bot_type: "custom" } });
+      // initChatWidget({ widgetToken: "abcde", parentId: 'widget-container', launch_widget: true, variables: { bot_id: 1339, bot_type: "custom" } });
+      // chatWidget.open("ch-comp-301408.41461e57cbca445994e1ce11c061ee29");
+      chatWidget.showTicket("ch-comp-301408.0f2a781f541f4d3e9de81d9d51ff2ee4");
+      // chatWidget.SendDataToBot({ viewMode: 'ticket', fullScreen: true })
     }
 
     function logoutWidget1() {
@@ -133,21 +152,10 @@
       clickedButton.classList.add('active-button');
     }
 
-
-
-    // initChatWidgetDemo(helloConfig2)
-    // initChatWidget({ widgetToken: "f1827", launch_widget: true, unique_id: "call3" });
-
     window.onload = function () {
       document.querySelector('button').classList.add('active-button');
     };
 
-    function changeUrl(path) {
-      if (window.location.pathname !== path) {
-        history.pushState({}, '', path);
-        // Optional: trigger custom event or handle SPA routing
-      }
-    }
   </script>
 </body>
 
